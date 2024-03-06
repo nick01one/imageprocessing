@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  imageprocessingapp:
+    image: <registry_name>.azurecr.io/imageprocessingapp
+    container_name: imageprocessingapp
+    build:
+      context: .
+      dockerfile: ImageProcessingApp/Dockerfile
+    
+  imageprocessingservice:
+    image: <registry_name>.azurecr.io/imageprocessingservice
+    container_name: imageprocessingservice
+    build:
+      context: .
+      dockerfile: ImageProcessingService/Dockerfile

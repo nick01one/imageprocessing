@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  imageprocessingapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    volumes:
+        - type: volume
+          source: myhttps
+          target: /home/app/.aspnet/https
+        - type: volume
+          source: mysecrets
+          target: /home/app/.microsoft/usersecrets
+    ports:
+      - "8080"
+      - "8081"
+  imageprocessingservice:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+volumes:
+  myhttps:
+   driver: azure_file 
+   driver_opts:
+      share_name: myhttps
+      storage_account_name: appresourcestorage
+  mysecrets:
+   driver: azure_file 
+   driver_opts:
+      share_name: mysecrets
+      storage_account_name: appresourcestorage
+    
